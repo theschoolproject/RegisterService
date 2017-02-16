@@ -1,10 +1,28 @@
 package com.school.project.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.transaction.Transactional;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;;
+
+@Entity	
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.NON_NULL)
+@Table
 public class School {
-	
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	@Id
+	Integer id;
 	private String name;
-	private String code;
+	private String code;	
 	private String address;
 	private String email;
 	private int phone;
@@ -12,10 +30,13 @@ public class School {
 	private String website;
 	private String bellSchedule;
 	private String grades;
-	public int getId() {
+	
+	
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {
