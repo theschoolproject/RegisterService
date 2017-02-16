@@ -1,6 +1,8 @@
 package com.school.project.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +18,15 @@ import com.school.project.service.RegisterService;
 @Transactional
 @RequestMapping(value = "/register")
 public class RegisterController {
+	
+	private final Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
 	@Autowired
 	private RegisterService service;
 
-	@RequestMapping(value = "school", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "school", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void register(@RequestBody School school) {
-		
+		logger.info("Register controller for school:" +school.getName());
 		service.register(school);
 	}
 

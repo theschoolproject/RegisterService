@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>	
+<property name="LOG_PATTERN"
+			 value="%d{HH:mm:ss.SSS} [%thread] %-5level [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] %logger{36}.%M %line - %msg%n"/>
+<property name="LOG_PATH"
+			 value="\logs"/>
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		
+		<!--  active file name -->
+		<file>${LOG_PATH}/register.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${LOG_PATH}/register.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<!-- keep 7 days worth of history -->
+			<maxHistory>7</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        		<!-- or whenever the file size reaches 10MB -->
+        		<maxFileSize>10MB</maxFileSize>
+      		</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+  <!-- encoders are assigned the type
+       ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+    </encoder>
+  </appender>
+	
+	<appender name="FILE_REST_INTERCEPTOR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- active file name -->
+		<file>${LOG_PATH}/register-rest.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${LOG_PATH}/register-rest.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<!-- keep 7 days worth of history -->
+			<maxHistory>7</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- or whenever the file size reaches 10MB -->
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="com.school" level="INFO" additivity="false">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="com.school.interceptor" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE_REST_INTERCEPTOR" />
+	</logger>
+	<logger name="org.springframework" level="WARN" />
+	<logger name="ch.qos.logback.core" level="WARN" />
+	<logger name="ch.qos.logback.classic" level="WARN" />	
+	
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

@@ -1,0 +1,4 @@
+16:48:03.561 [http-nio-8002-exec-1] INFO  [,,] o.a.c.c.C.[Tomcat].[localhost].[/].log 179 - Initializing Spring FrameworkServlet 'dispatcherServlet'
+16:48:03.859 [http-nio-8002-exec-1] INFO  [,,] c.s.p.controller.RegisterController.register 29 - Register controller for school:xxxxx
+16:48:03.860 [http-nio-8002-exec-1] INFO  [,,] c.s.p.s.impl.RegisterServiceImpl.register 22 - Register Service for school:xxxxx
+16:48:03.868 [http-nio-8002-exec-1] INFO  [,,] c.s.project.dao.impl.RegisterDaoImpl.saveSchool 16 - saving school:xxxxx
